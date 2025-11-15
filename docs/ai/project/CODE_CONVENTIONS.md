@@ -16,37 +16,36 @@ The generator merges the above templates (when present) and then appends auto-di
 
 ### TypeScript
 
-- Enable strict mode (`"strict": true`) and no implicit `any` in `tsconfig.json`.
-- Prefer explicit function return types for exported/public APIs.
-- Use discriminated unions over enums where ergonomics permit; avoid `any`.
-- Name files in `camelCase` or `kebab-case` consistently; React components in `PascalCase.tsx`.
+35. **Enable strict mode** (`"strict": true`) and no implicit `any` in `tsconfig.json`.
+36. **Prefer explicit function return types** for exported/public APIs.
+37. **Use discriminated unions over enums** where ergonomics permit; avoid `any`.
 
 ### React / Next.js
 
-- **Server-First Approach for SEO Optimization:**
-  - Use Server Components by default; opt into Client Components (`"use client"`) only when interactivity (state, events, browser APIs) is required.
-  - Prefer Server Actions for data mutations and form submissions to minimize client-side JavaScript.
-  - Fetch data in Server Components whenever possible (co-located with the component) for optimal performance and SEO.
-  - Use `generateMetadata` for dynamic page metadata to improve SEO and social sharing.
-  - Leverage streaming with Suspense boundaries to improve perceived performance and SEO (avoid blocking the entire page).
-- Use App Router (`src/app`) structure; keep route files thin (page.tsx, layout.tsx) and import logic from feature modules.
-- Place route handlers in `app/**/route.ts` for APIs/webhooks; use Server Actions in feature modules for mutations.
-- Keep components pure; colocate feature-specific components within their feature directories.
-- Avoid deep prop drilling; use context sparingly and memoization (`useMemo`, `useCallback`) only when profiling indicates bottlenecks.
-- Prefer `next/link` and `next/navigation` hooks; avoid legacy router APIs.
+38. **Server-First Approach for SEO Optimization:**
+    - Use Server Components by default; opt into Client Components (`"use client"`) only when interactivity (state, events, browser APIs) is required.
+    - Prefer Server Actions for data mutations and form submissions to minimize client-side JavaScript.
+    - Fetch data in Server Components whenever possible (co-located with the component) for optimal performance and SEO.
+    - Use `generateMetadata` for dynamic page metadata to improve SEO and social sharing.
+    - Leverage streaming with Suspense boundaries to improve perceived performance and SEO (avoid blocking the entire page).
+39. **Use App Router (`src/app`) structure**; keep route files thin (page.tsx, layout.tsx) and import logic from feature modules.
+40. **Place route handlers in `app/**/route.ts`\*\* for APIs/webhooks; use Server Actions in feature modules for mutations.
+41. **Keep components pure**; colocate feature-specific components within their feature directories.
+42. **Avoid deep prop drilling**; use context sparingly and memoization (`useMemo`, `useCallback`) only when profiling indicates bottlenecks.
+43. **Prefer `next/link` and `next/navigation` hooks**; avoid legacy router APIs.
 
 ### Styling (Tailwind CSS)
 
-- Use utility-first classes; extract reusable patterns into components, not giant class strings.
-- Keep `globals.css` minimal; add component-scoped styles via Tailwind or CSS modules only when necessary.
-- Order Tailwind classes logically (layout → box-model → typography → visual → state → responsive).
+44. **Use utility-first classes**; extract reusable patterns into components, not giant class strings.
+45. **Keep `globals.css` minimal**; add component-scoped styles via Tailwind or CSS modules only when necessary.
+46. **Order Tailwind classes logically** (layout → box-model → typography → visual → state → responsive).
 
 ### Supabase
 
-- Initialize a browser client with `NEXT_PUBLIC_*` keys and a server client with the service role key server-side only.
-- Never expose service role key to the client; use Route Handlers/Server Actions for privileged operations.
-- Use Row Level Security (RLS) with policies; do not bypass with service role unless strictly needed.
-- Store auth state via Supabase helpers; avoid duplicating session state in Redux/Zustand by default.
+47. **Initialize a browser client** with `NEXT_PUBLIC_*` keys and a server client with the service role key server-side only.
+48. **Never expose service role key to the client**; use Route Handlers/Server Actions for privileged operations.
+49. **Use Row Level Security (RLS) with policies**; do not bypass with service role unless strictly needed.
+50. **Store auth state via Supabase helpers**; avoid duplicating session state in Redux/Zustand by default.
 
 ### Project structure (Feature-Sliced pattern)
 
@@ -69,14 +68,14 @@ See `PROJECT_STRUCTURE.md` for detailed Feature-Sliced organization guidelines.
 
 ### Testing & Quality
 
-- Lint with ESLint and format with Prettier; CI should block on both.
-- Add lightweight component tests for critical UI; prefer integration tests for auth/data flows.
-- Avoid `console.log` in committed code; use typed logger where needed.
+51. **Lint with ESLint and format with Prettier**; CI should block on both.
+52. **Add lightweight component tests** for critical UI; prefer integration tests for auth/data flows.
+53. **Avoid `console.log` in committed code**; use typed logger where needed.
 
 ### Git & Commits
 
-- Conventional Commits (`feat:`, `fix:`, `docs:`, `refactor:`, etc.).
-- Keep pull requests focused and small; include screenshots for UI changes.
+54. **Use Conventional Commits** (`feat:`, `fix:`, `docs:`, `refactor:`, etc.).
+55. **Keep pull requests focused and small**; include screenshots for UI changes.
 
 <!-- GENERATED: CODE_CONVENTIONS:START -->
 
@@ -92,164 +91,159 @@ This document is auto-generated from codebase analysis + brief Q&A. Edit manuall
 > These rules are preloaded by the standards generator before analyzing the codebase. They establish non-negotiable, high-signal conventions. The generator should merge these rules first, then append auto-discovered patterns.
 
 ## Principles — The "Why"
-- DRY (Don't Repeat Yourself): Avoid duplicating code. Abstract common logic into reusable functions, classes, or modules.
-- KISS (Keep It Simple, Stupid): Prefer simple, straightforward solutions over clever or unnecessarily complex ones. Code should be as simple as possible, but no simpler.
-- YAGNI (You Ain't Gonna Need It): Do not add functionality or create abstractions until they are actually needed. Avoid premature optimization.
+1. **DRY (Don't Repeat Yourself)**: Avoid duplicating code. Abstract common logic into reusable functions, classes, or modules.
+2. **KISS (Keep It Simple, Stupid)**: Prefer simple, straightforward solutions over clever or unnecessarily complex ones. Code should be as simple as possible, but no simpler.
+3. **YAGNI (You Ain't Gonna Need It)**: Do not add functionality or create abstractions until they are actually needed. Avoid premature optimization.
 
 ## Naming — Clarity & Descriptiveness
-- Prefer meaningful, verbose names over abbreviations.
-- Avoid 1–2 character identifiers (except conventional counters like `i`, `j`, `k` in very small loop scopes).
-- Be consistent. If you use `getUser` in one place, use `getProduct` in another, not `fetchProduct`.
-- Function names should be verbs; variables and classes should be nouns. (e.g., `calculateTotal()`, `const user`, `class Order`).
+4. **Prefer meaningful, verbose names** over abbreviations.
+5. **Avoid 1–2 character identifiers** (except conventional counters like `i`, `j`, `k` in very small loop scopes).
+6. **Be consistent**: If you use `getUser` in one place, use `getProduct` in another, not `fetchProduct`.
+7. **Function names should be verbs; variables and classes should be nouns** (e.g., `calculateTotal()`, `const user`, `class Order`).
+
+### File Naming
+8. **Component Files (Custom)**: Use `PascalCase` (e.g., `UserProfile.tsx`, `DashboardCard.tsx`).
+9. **Component Files (Library/Shadcn)**: Use `kebab-case` (e.g., `button.tsx`, `card.tsx`).
+10. **Utility Files and Other Files**: Use `kebab-case` (e.g., `auth-helper.ts`, `format-date.ts`).
+11. **Test Files**: Use base filename + `.test.ts` or `.spec.ts` suffix (e.g., `UserProfile.test.tsx` for testing `UserProfile.tsx`).
+12. **Type Definition Files**: Use `kebab-case` without `.types` suffix (e.g., `user.ts`, `api-response.ts`).
 
 ## Functions / Methods
-- Single Responsibility Principle: A function should do one thing and do it well. If you can't describe what a function does in one simple sentence, it's likely doing too much.
-- Limit Arguments: Prefer 0-2 arguments per function. If you need more than two, consider passing a single configuration object.
-- Avoid Side Effects: Functions should be predictable. They should avoid modifying external state, global variables, or their own input arguments whenever possible. A function `calculateTotal(items)` should return a new value, not modify the original `items` array.
+13. **Single Responsibility Principle**: A function should do one thing and do it well. If you can't describe what a function does in one simple sentence, it's likely doing too much.
+14. **Limit Arguments**: Prefer 0-2 arguments per function. If you need more than two, consider passing a single configuration object.
+15. **Avoid Side Effects**: Functions should be predictable. They should avoid modifying external state, global variables, or their own input arguments whenever possible. A function `calculateTotal(items)` should return a new value, not modify the original `items` array.
 
 ## Control Flow
-- Prefer guard clauses (early returns) to reduce nesting depth.
-- Handle errors and edge cases first.
-- Avoid deep nesting beyond 2–3 levels. Refactor deeply nested logic into smaller, well-named functions.
+16. **Prefer guard clauses** (early returns) to reduce nesting depth.
+17. **Handle errors and edge cases first**.
+18. **Avoid deep nesting** beyond 2–3 levels. Refactor deeply nested logic into smaller, well-named functions.
 
 ## Variables & Data Structures
-- Minimize Scope: Declare variables in the smallest possible scope (e.g., inside a loop or conditional block if they are only used there).
-- Avoid Magic Values: Do not use "magic" strings or numbers directly in code. Define them as named constants to provide context and avoid typos.
-  - *Bad:* `if (status === 2) { ... }`
-  - *Good:* `const STATUS_APPROVED = 2; if (status === STATUS_APPROVED) { ... }`
-- Prefer Immutability:** Do not reassign variables or mutate data structures if it can be avoided. Creating new data structures instead of changing existing ones leads to more predictable code.
+19. **Minimize Scope**: Declare variables in the smallest possible scope (e.g., inside a loop or conditional block if they are only used there).
+20. **Avoid Magic Values**: Do not use "magic" strings or numbers directly in code. Define them as named constants to provide context and avoid typos.
+    - *Bad:* `if (status === 2) { ... }`
+    - *Good:* `const STATUS_APPROVED = 2; if (status === STATUS_APPROVED) { ... }`
+21. **Prefer Immutability**: Do not reassign variables or mutate data structures if it can be avoided. Creating new data structures instead of changing existing ones leads to more predictable code.
 
 ## Error Handling
-- Throw errors with clear, actionable messages.
-- Do not catch errors without meaningful handling (e.g., logging, retrying, or re-throwing a more specific error). Swallowing exceptions silently is a major source of bugs.
+22. **Throw errors with clear, actionable messages**.
+23. **Do not catch errors without meaningful handling** (e.g., logging, retrying, or re-throwing a more specific error). Swallowing exceptions silently is a major source of bugs.
 
 ## Comments
-- Add comments only for complex or non-obvious logic; explain **"why"**, not **"how"**. Well-written code should explain the "how" by itself.
-- Place comments above code blocks or use language-specific docstrings.
-- Avoid trailing inline comments as they can clutter code.
-- Remove Dead Code: Do not leave commented-out code in the codebase. Source control (like Git) is the history.
+24. **Add comments only when necessary** for complex or non-obvious logic; explain **"why"**, not **"how"**. Well-written code should explain the "how" by itself.
+25. **Place comments above code blocks**; avoid trailing inline comments as they can clutter code.
+26. **Remove Dead Code**: Do not leave commented-out code in the codebase. Source control (like Git) is the history.
 
 ## Formatting
-- Match existing repository formatting tools and styles (e.g., Prettier, Black, gofmt). Consistency is key.
-- Prefer multi-line over long one-liners or complex ternaries for readability.
-- Wrap long lines and do not reformat unrelated code in a change that is focused on logic.
+27. **Match existing repository formatting tools** and styles (e.g., Prettier, Black, gofmt). Consistency is key.
+28. **Prefer multi-line over long one-liners** or complex ternaries for readability.
+29. **Wrap long lines** and do not reformat unrelated code in a change that is focused on logic.
 
 ## Types (for statically typed languages)
-- Explicitly annotate public APIs and function signatures.
-- Avoid unsafe casts or overly broad types (e.g., `any`, `Object`). Be as specific as possible.
+30. **Explicitly annotate public APIs** and function signatures.
+31. **Avoid unsafe casts or overly broad types** (e.g., `any`, `Object`). Be as specific as possible.
 
 ## Change Discipline
-- Perform changes via file editing tools; avoid pasting large code blobs in reviews.
-- Re-read target files before editing to ensure accurate context.
-- After edits, run only fast, non-interactive validation on changed files:
-  - If a linter is configured, run it on changed paths (e.g., `eslint --max-warnings=0 <changed-paths>`). Use `--fix` when safe to auto-fix.
-  - If a type checker is used, run type-check only (e.g., `tsc --noEmit` or `mypy <changed-paths>`).
-  - Do NOT run Prettier as part of validation (formatting is enforced separately by tooling/CI).
-  - Do NOT run a full build or dev server (to avoid unnecessary time cost).
-  - Attempt auto-fixes up to 3 times for linter issues before requesting help.
+32. **Perform changes via file editing tools**; avoid pasting large code blobs in reviews.
+33. **Re-read target files before editing** to ensure accurate context.
+34. **After edits, run only fast, non-interactive validation** on changed files:
+    - If a linter is configured, run it on changed paths (e.g., `eslint --max-warnings=0 <changed-paths>`). Use `--fix` when safe to auto-fix.
+    - If a type checker is used, run type-check only (e.g., `tsc --noEmit` or `mypy <changed-paths>`).
+    - Do NOT run Prettier as part of validation (formatting is enforced separately by tooling/CI).
+    - Do NOT run a full build or dev server (to avoid unnecessary time cost).
+    - Attempt auto-fixes up to 3 times for linter issues before requesting help.
 ```
 
 ## From javascript.md
 
-```1:28:docs/ai/project/template-convention/javascript.md
-# JavaScript Conventions (Essential)
+### Language
 
-## Language
-- Use ES Modules (`import`/`export`).
-- Prefer `const` (default) and `let`; avoid `var`.
-- Use strict equality `===`/`!==`.
-- Prefer optional chaining `?.` and nullish coalescing `??` over `||` when `0/''/false` are valid values.
+56. **Use ES Modules** (`import`/`export`).
+57. **Prefer `const` (default) and `let`**; avoid `var`.
+58. **Use strict equality** `===`/`!==`.
+59. **Prefer optional chaining `?.` and nullish coalescing `??`** over `||` when `0/''/false` are valid values.
 
-## Syntax & Readability
-- Use destructuring to access properties from objects and arrays.
-- Use the spread syntax (`...`) for creating shallow copies of arrays and objects.
-- Prefer array methods (`.map`, `.filter`, `.reduce`) over `for` loops for data transformation.
-- Use `for...of` for simple iterations over iterables.
+### Syntax & Readability
 
-## Functions & Data
-- Keep functions small and single-purpose.
-- Use arrow functions (`=>`) for callbacks and to preserve `this` context.
-- Avoid mutations; prefer immutable updates for objects/arrays.
-- Return early (guard clauses) to reduce nesting.
+60. **Use destructuring** to access properties from objects and arrays.
+61. **Use the spread syntax (`...`)** for creating shallow copies of arrays and objects.
+62. **Prefer array methods** (`.map`, `.filter`, `.reduce`) over `for` loops for data transformation.
+63. **Use `for...of`** for simple iterations over iterables.
 
-## Errors & Async
-- Use `async/await`; avoid unhandled promises (no floating promises).
-- Throw `Error` objects with clear messages; catch only to handle meaningfully.
+### Functions & Data
 
-## Style & Safety
-- Avoid implicit globals; module scope only.
-- Prefer explicit returns over side effects.
-- Keep imports minimal and ordered (std/third-party/internal).
-```
+64. **Use arrow functions (`=>`)** for callbacks and to preserve `this` context.
+
+### Errors & Async
+
+65. **Use `async/await`**; avoid unhandled promises (no floating promises).
+
+### Style & Safety
+
+66. **Avoid implicit globals**; module scope only.
+67. **Prefer explicit returns** over side effects.
+68. **Keep imports minimal and ordered** (std/third-party/internal).
 
 ## From react.md
 
-```1:25:docs/ai/project/template-convention/react.md
-# React Conventions (Essential)
+### Components
 
-## Components
-- Use PascalCase for component names; one component per file (primary export).
-- Props are immutable; derive minimal state. Lift state up when shared.
-- Use stable `key` for lists (not index) when order can change.
+69. **Use PascalCase for component names**; one component per file (primary export).
+70. **Props are immutable**; derive minimal state. Lift state up when shared.
+71. **Use stable `key` for lists** (not index) when order can change.
 
-## Hooks
-- Follow the Rules of Hooks (top-level, consistent order).
-- Declare all hook dependencies explicitly; prefer stable callbacks with `useCallback` when passed to children.
-- Memoize expensive computations with `useMemo` only when measured bottlenecks exist.
+### Hooks
 
-## State & Effects
-- Keep state minimal and serializable; avoid duplicating derived data.
-- Side effects belong in `useEffect` with correct deps; cleanup subscriptions/timers.
+72. **Follow the Rules of Hooks** (top-level, consistent order).
+73. **Declare all hook dependencies explicitly**; prefer stable callbacks with `useCallback` when passed to children.
 
-## Performance
-- Avoid unnecessary re-renders: memo child components when props are stable.
-- Prefer split code (lazy + Suspense) for large routes/widgets.
+### State & Effects
 
-## Accessibility
-- Use semantic elements first; include `aria-*` only when needed.
-- Ensure interactive elements are keyboard-accessible and have discernible labels.
-```
+74. **Keep state minimal and serializable**; avoid duplicating derived data.
+75. **Side effects belong in `useEffect`** with correct deps; cleanup subscriptions/timers.
+
+### Performance
+
+76. **Avoid unnecessary re-renders**: memo child components when props are stable.
+77. **Prefer split code** (lazy + Suspense) for large routes/widgets.
+
+### Accessibility
+
+78. **Use semantic elements first**; include `aria-*` only when needed.
+79. **Ensure interactive elements are keyboard-accessible** and have discernible labels.
 
 ## From typescript.md
 
-```1:25:docs/ai/project/template-convention/typescript.md
-# TypeScript Conventions (Essential)
+### Types & Interfaces
 
-## Types & Interfaces
-- Use `interface` for public APIs and object shapes, as they are easily extended.
-- Use `type` for unions (`|`), intersections (`&`), tuples, or complex type aliases.
+80. **Use `interface` for public APIs and object shapes**, as they are easily extended.
+81. **Use `type` for unions (`|`), intersections (`&`), tuples**, or complex type aliases.
 
-## Naming Conventions
-- Use `PascalCase` for all type-level identifiers (Types, Interfaces, Classes, Enums, Generics).
-- Use `camelCase` for all value-level identifiers (variables, functions, properties).
-- Avoid the `I` prefix for interfaces (e.g., `User`, not `IUser`).
-- Use the `private` keyword instead of an underscore (`_`) prefix for private members.
+### Naming Conventions
 
-## Type Safety
-- Avoid `any`. It disables type-checking and defeats the purpose of TypeScript.
-- Prefer `unknown` over `any`. It is a type-safe alternative that forces type-checking before use.
-- Use `readonly` for properties that should not be mutated after initialization to enforce immutability.
-- Explicitly type all public function signatures to ensure a clear and stable API.
+82. **Use `PascalCase` for all type-level identifiers** (Types, Interfaces, Classes, Enums, Generics).
+83. **Use `camelCase` for all value-level identifiers** (variables, functions, properties).
+84. **Avoid the `I` prefix for interfaces** (e.g., `User`, not `IUser`).
+85. **Use the `private` keyword** instead of an underscore (`_`) prefix for private members.
+86. **Use `UPPER_SNAKE_CASE` for constants**.
 
-## Modules & Organization
-- Always use ES Modules (`import`/`export`).
-- Prefer named exports over `default` exports. They improve consistency and refactorability.
-- Avoid `namespace`. ES Modules provide superior encapsulation and are the language standard.
+### Type Safety
 
-## Documentation
-- Use JSDoc (`/** ... */`) for all exported members (functions, classes, types). This provides context and enables rich editor tooltips.
-```
+87. **Avoid `any`**. It disables type-checking and defeats the purpose of TypeScript.
+88. **Prefer `unknown` over `any`**. It is a type-safe alternative that forces type-checking before use.
+89. **Use `readonly` for properties** that should not be mutated after initialization to enforce immutability.
+
+### Modules & Organization
+
+90. **Prefer named exports over `default` exports**. They improve consistency and refactorability.
+91. **Avoid `namespace`**. ES Modules provide superior encapsulation and are the language standard.
 
 # Auto-Discovered and Q&A-Aligned Rules
 
-- Languages/frameworks: Next.js + TypeScript + Supabase (confirmed).
-- Formatter/Linter: ESLint + Prettier (confirmed).
-- Tests: prefer `__tests__/` directories; name as `*.test.ts(x)` or `*.spec.ts(x)`.
-- Error handling: use exceptions with `try/catch` at boundaries; rethrow with context.
-- Async: prefer `async/await`; avoid floating promises; centralize API error normalization.
-- Naming: `camelCase` for values/functions, `PascalCase` for types/classes, `UPPER_SNAKE_CASE` for constants.
-- Imports: group and order as Node built-ins → third-party → internal, with blank lines between groups.
-- Module organization: TBD (awaiting user choice: by feature / by layer / mixed).
-- Security: never expose Supabase service role key to clients; enforce RLS.
+92. **Languages/frameworks**: Next.js + TypeScript + Supabase (confirmed).
+93. **Formatter/Linter**: ESLint + Prettier (confirmed).
+94. **Tests**: prefer `__tests__/` directories; name as `*.test.ts(x)` or `*.spec.ts(x)`.
+95. **Error handling**: use exceptions with `try/catch` at boundaries; rethrow with context.
+96. **Module organization**: TBD (awaiting user choice: by feature / by layer / mixed).
 
 <!-- GENERATED: CODE_CONVENTIONS:END -->
