@@ -5,4 +5,3 @@ export function getBrowserSupabase() {
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? '';
   return createClient(url, anonKey);
 }
-

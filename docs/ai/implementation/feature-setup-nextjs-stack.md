@@ -3,9 +3,11 @@
 Note: All content in this document must be written in English.
 
 ## Summary
+
 - Initialize a Next.js 15 + TypeScript app at repo root using pnpm with `src/` layout, Tailwind pre-configured, shadcn/ui initialized via `components.json`, Supabase clients (DB-only), and a sample API route.
 
 ## Changes
+
 - (Done) Created `src/` directory at repository root to host application code.
 - (Done) Added Next.js base configs: `package.json`, `tsconfig.json`, `next.config.ts`.
 - (Done) Added Tailwind setup: `tailwind.config.ts`, `postcss.config.js`, app `globals.css`.
@@ -21,14 +23,16 @@ Note: All content in this document must be written in English.
 - (Planned) Update `docs/ai/project/PROJECT_STRUCTURE.md`.
 
 ## Edge Cases
+
 - Ensure non-interactive installs; avoid writing Git config.
 - Keep service role keys server-only; do not expose to client.
 
 ## Follow-ups
+
 - Add auth and RLS policies in later features.
 
 ## Execution Discipline
+
 - Before each edit, provide a short status update describing the next action (1–3 sentences).
 - Perform edits via file editing tools; avoid printing large code blocks for copy-paste.
 - After each batch of edits, run linter/type/build on changed files; auto-fix issues (up to 3 attempts) before requesting review.
-

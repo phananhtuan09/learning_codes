@@ -29,7 +29,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             placeholder="Search..."
             className="hidden sm:block h-9 rounded border bg-transparent px-3 text-sm"
           />
-          <button aria-label="Account" className="inline-flex h-9 w-9 items-center justify-center rounded border">👤</button>
+          <button
+            aria-label="Account"
+            className="inline-flex h-9 w-9 items-center justify-center rounded border"
+          >
+            👤
+          </button>
           <SettingsMenu />
         </div>
       </header>
@@ -41,7 +46,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           }
         >
           <nav className="space-y-1">
-            <Link href="/" className="block rounded px-2 py-1 hover:bg-accent">Home</Link>
+            <Link href="/" className="block rounded px-2 py-1 hover:bg-accent">
+              Home
+            </Link>
             <button
               className="w-full text-left rounded px-2 py-1 hover:bg-accent"
               onClick={() => setSidebarOpen(false)}
@@ -51,9 +58,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           </nav>
         </aside>
 
-        <main className="p-4">
-          {children}
-        </main>
+        <main className="p-4">{children}</main>
       </div>
 
       <footer className="border-t px-4 py-3 text-xs text-muted-foreground">
@@ -61,10 +66,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
           <span>© {new Date().getFullYear()} Learning Code</span>
           <nav className="flex gap-3">
             <Link href="/">Home</Link>
-            <a href="#" aria-disabled>Docs</a>
+            <a href="#" aria-disabled>
+              Docs
+            </a>
           </nav>
         </div>
-        <div className="sm:hidden text-center">© {new Date().getFullYear()} Learning Code</div>
+        <div className="sm:hidden text-center">
+          © {new Date().getFullYear()} Learning Code
+        </div>
       </footer>
     </div>
   );
@@ -99,7 +108,9 @@ function ThemeToggle() {
 
   useEffect(() => {
     const stored = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersDark = window.matchMedia(
+      '(prefers-color-scheme: dark)',
+    ).matches;
     const initialDark = stored ? stored === 'dark' : prefersDark;
     setIsDark(initialDark);
     document.documentElement.classList.toggle('dark', initialDark);
@@ -122,5 +133,3 @@ function ThemeToggle() {
     </button>
   );
 }
-
-

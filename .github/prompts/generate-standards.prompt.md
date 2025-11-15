@@ -1,3 +1,9 @@
+---
+name: 'generate-standards'
+description: 'Generates/updates code convention and project structure docs from the codebase.'
+agent: 'agent'
+tools: ['codebase', 'fileSearch', 'listDirectory', 'readFile', 'createFile', 'editFiles', 'edit']
+---
 ## Goal
 
 Generate or update `docs/ai/project/CODE_CONVENTIONS.md` and `PROJECT_STRUCTURE.md` from the current codebase with brief Q&A refinement.
@@ -57,6 +63,7 @@ Generate two documents (with template preload):
 ### CODE_CONVENTIONS.md
 
 - Template preload (flexible matching based on detected project context):
+
   1. Read all files in `docs/ai/project/template-convention/` directory
   2. For each template file, determine if it matches the detected project context:
      - Match by language (e.g., `javascript.md`, `typescript.md`, `python.md`)

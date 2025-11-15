@@ -1,18 +1,27 @@
 Use `docs/ai/testing/feature-{name}.md` as the source of truth.
 
+## Workflow Alignment
+
+- Provide brief status updates (1–3 sentences) before/after important actions.
+- For medium/large tasks, create todos (≤14 words, verb-led). Keep only one `in_progress` item.
+- Update todos immediately after progress; mark completed upon finish.
+- Default to parallel execution for independent operations; use sequential steps only when dependencies exist.
+
 ## Step 1: Gather Context (minimal)
+
 - Ask for feature name if not provided (must be kebab-case).
 - **Load template:** Read `docs/ai/testing/feature-template.md` to understand required structure.
 - Then locate docs by convention:
   - Planning: `docs/ai/planning/feature-{name}.md`
   - Implementation (optional): `docs/ai/implementation/feature-{name}.md`
-- **Detect test framework:** Check `package.json` and project structure to identify test framework (Vitest, Jest, Mocha, pytest, etc.)
+- **Detect test framework:** Check `package.json` and project structure to identify test framework (Vitest, Jest, Mocha, pytest, etc.). Auto-detect from `package.json` first; if no test runner found, create skeleton test and report missing runner.
 - **Load standards:** Read `docs/ai/project/PROJECT_STRUCTURE.md` for test file placement rules
 - **Load conventions:** Read `docs/ai/project/CODE_CONVENTIONS.md` for coding standards
 
 Always align test cases with acceptance criteria from the planning doc. If implementation notes are missing, treat planning as the single source of truth.
 
 ## Step 2: Scope (logic and component tests only)
+
 - **Focus on:**
   - Pure function logic: test with various input parameters (happy path, edge cases, invalid inputs)
   - Component logic: test component behavior with different props/parameters (without complex rendering)
@@ -31,7 +40,9 @@ Always align test cases with acceptance criteria from the planning doc. If imple
 - Keep tests simple, fast, and deterministic.
 
 ## Step 3: Analyze Code to Test
+
 Read implementation files from `docs/ai/implementation/feature-{name}.md` or scan source code files:
+
 - Identify all functions/components that need testing:
   - List each function with its signature (parameters, return type, exceptions)
   - List each component with its props interface
@@ -45,6 +56,7 @@ Read implementation files from `docs/ai/implementation/feature-{name}.md` or sca
   - Mathematical properties (if applicable): commutativity, associativity, idempotency, invariants
 
 ## Step 4: Generate Test Code (automatic)
+
 For each function/component identified:
 
 1. **Create test file** according to `PROJECT_STRUCTURE.md`:
@@ -81,6 +93,7 @@ For each function/component identified:
    - Test with random inputs following constraints
 
 **Example test structure:**
+
 ```javascript
 import { describe, it, expect } from 'vitest';
 import { functionToTest } from './source-file';
@@ -89,23 +102,23 @@ describe('functionToTest', () => {
   it('should return correct value with normal parameters', () => {
     // Test with standard inputs
   });
-  
+
   it('should handle edge case with empty input', () => {
     // Test boundary
   });
-  
+
   it('should handle null input', () => {
     // Test null handling
   });
-  
+
   it('should handle different parameter combinations', () => {
     // Test various param combinations
   });
-  
+
   it('should throw error with invalid input', () => {
     // Test error handling
   });
-  
+
   it('should maintain idempotency property', () => {
     // Property-based test
   });
@@ -113,14 +126,15 @@ describe('functionToTest', () => {
 ```
 
 ## Step 5: Run Tests with Logging (automatic)
+
 After generating test code:
 
-1. **Execute test command** based on detected framework:
-   - Vitest: `npm test` or `npx vitest run`
-   - Jest: `npm test` or `npx jest`
-   - Mocha: `npm test` or `npx mocha`
-   - pytest: `pytest` or `python -m pytest`
-   - Other: detect from `package.json` scripts
+1. **Execute test command** based on detected framework (use non-interactive flags):
+   - Vitest: `npm test` or `npx vitest run --run`
+   - Jest: `npm test` or `npx jest --ci`
+   - Mocha: `npm test` or `npx mocha --reporter spec`
+   - pytest: `pytest` or `python -m pytest -v`
+   - Other: detect from `package.json` scripts, add `--no-interactive` or equivalent flags
 
 2. **Capture and display output** in terminal with detailed logging:
    - Show test execution progress (which tests are running)
@@ -131,24 +145,25 @@ After generating test code:
    - Format output clearly for readability
 
 3. **Log format example:**
+
    ```
    === Running tests for feature: {name} ===
-   
+
    RUN  test-file-1.spec.js
      ✓ should handle normal case (2ms)
      ✓ should handle edge case (1ms)
      ✗ should handle invalid input (3ms)
-       
+
        Error: Expected error to be thrown
        at test-file-1.spec.js:25
-       
+
      ✓ should handle parameter combinations (5ms)
      ✓ should maintain property (1ms)
-   
+
    Test Files:  1 passed | 0 failed | 1 total
    Tests:       4 passed | 1 failed | 5 total
    Time:        0.012s
-   
+
    Coverage:
    - Lines: 82% (lines covered / total lines)
    - Branches: 75% (branches covered / total branches)
@@ -162,6 +177,7 @@ After generating test code:
    - Update implementation doc if code changes were needed
 
 ## Step 6: Coverage Gap Analysis (automatic)
+
 After initial test generation and execution:
 
 1. **Analyze coverage report:**
@@ -180,9 +196,11 @@ After initial test generation and execution:
    - Continue generating tests until targets are met or all practical cases are covered
 
 ## Step 7: Update Testing Doc
+
 Use structure from `docs/ai/testing/feature-template.md` to populate `docs/ai/testing/feature-{name}.md`.
 
 Fill with:
+
 - **Test Files Created**: List all test files generated with paths
 - **Test Cases Summary**: Brief summary of what was tested (function/component + key scenarios)
   - Happy path scenarios
@@ -200,6 +218,7 @@ Fill with:
 Ensure all required sections from template are present. Keep the document brief and actionable.
 
 ## Step 8: Verify Tests Pass
+
 - Ensure all generated tests pass successfully
 - Ensure coverage targets are met (default: 80% lines, 70% branches)
 - If any test fails, debug and fix issues
@@ -207,6 +226,7 @@ Ensure all required sections from template are present. Keep the document brief 
 - Re-run tests to confirm fixes
 
 ## Notes
+
 - Tests should be simple enough to run quickly and verify logic correctness
 - Focus on catching logic errors and edge cases through systematic parameter variation
 - Avoid complex test setup or mocking unless necessary for logic isolation
@@ -214,3 +234,5 @@ Ensure all required sections from template are present. Keep the document brief 
 - Test execution must show clear, detailed logging in terminal
 - AI excels at: edge case generation, parameter combinations, property-based testing, coverage analysis
 - Keep tests deterministic (avoid external dependencies, random values without seeds, time-dependent logic)
+- Creates test files only; does not edit non-test source files.
+- Idempotent: safe to re-run; appends entries or updates test doc deterministically.

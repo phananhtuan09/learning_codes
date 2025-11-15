@@ -1,3 +1,9 @@
+---
+name: 'create-plan'
+description: 'Generates a feature planning doc and initializes the implementation doc.'
+agent: 'agent'
+tools: ['edit/createFile', 'search/readFile', 'fetch', 'todos']
+---
 ## Goal
 
 Generate a planning doc at `docs/ai/planning/feature-{name}.md` using the template, with minimal, actionable content aligned to the 4-phase workflow. Also initialize the implementation doc at `docs/ai/implementation/feature-{name}.md` based on the implementation template.

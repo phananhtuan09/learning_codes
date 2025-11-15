@@ -1,4 +1,14 @@
+---
+name: 'check-implementation'
+description: 'Executes the implementation doc tasks, edits code, and persists notes.'
+agent: 'agent'
+tools: ['readFile', 'editFiles', 'edit', 'todos', 'runInTerminal', 'runTask', 'runTests', 'runCommands']
+---
 Compare current implementation against planning and implementation notes.
+
+## Workflow Alignment
+- Provide brief status updates (1–3 sentences) before/after important actions.
+- Provide a high-signal summary at completion highlighting key mismatches and next steps.
 
 1) Ask me for:
 - Feature name (if not provided)
@@ -15,4 +25,3 @@ Compare current implementation against planning and implementation notes.
 - List concrete mismatches between code and docs
 - List missing pieces the docs require but code lacks
 - Short actionable next steps
-

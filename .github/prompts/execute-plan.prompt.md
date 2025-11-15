@@ -1,3 +1,9 @@
+---
+name: 'execute-plan'
+description: 'Executes the implementation doc tasks, edits code, and persists notes.'
+agent: 'agent'
+tools: ['edit', 'search/readFile', 'runCommands', 'runTasks/runTask', 'problems', 'changes', 'fetch', 'todos']
+---
 ## Goal
 
 Execute the feature plan by implementing tasks from the implementation doc and persisting notes to docs.
